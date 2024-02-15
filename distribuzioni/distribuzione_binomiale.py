@@ -77,3 +77,23 @@ def limite_superiore_confidenza(p, n, alpha):
     limite_superiore = z * sigma + p
 
     return limite_superiore
+
+def calcola_p_value(p_hat, p_0, n):
+    z_stat = (p_hat - p_0) / (math.sqrt(p_0 * (1 - p_0) / n))
+    p_value = stats.norm.cdf(z_stat)
+    return p_value
+
+
+def confronta_proporzioni(p_hat_1, p_hat_2, n_casi_1, n_casi_2, n_interviste):
+    p_hat = (n_casi_1 + n_casi_2) / n_interviste
+    numeratore = p_hat_1 - p_hat_2
+    denominatore = math.sqrt(p_hat * (1 - p_hat) * (1 / n_casi_1 + 1 / n_casi_2))
+    z_stat = numeratore / denominatore
+    p_value = stats.norm.cdf(z_stat)
+    return p_value
+
+def discussione_valore_p(p_value, alpha):
+    if p_value < alpha:
+        return "Si rifiuta l'ipotesi nulla in quanto il p-value è minore del livello di significatività"
+    else:
+        return "Non si rifiuta l'ipotesi nulla in quanto il p-value è maggiore del livello di significatività"
