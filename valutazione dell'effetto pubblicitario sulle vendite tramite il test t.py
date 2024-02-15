@@ -32,5 +32,5 @@ p_value_T = dn.p_value_t(t_stat, len(vendite_post) - 1)
 print(f"Statistica Z: {z_stat:.4f}, P-value (Varianza nota): {p_value_Z:.4f}")
 print(f"Statistica T: {t_stat:.4f}, P-value (Varianza stimata): {p_value_T:.4f}")
 
-interpretazione = dn.discuti_risultati_test(p_value_Z, p_value_T, alpha=0.10)
+interpretazione = dn.discuti_risultati_test(z_stat, t_stat, p_value_Z, p_value_T, alpha=0.10)
 print(interpretazione)
