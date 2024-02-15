@@ -62,17 +62,19 @@ def discuti_risultati_test(media_camp, media_pop, p_value_Z, p_value_T, alpha=0.
     discussione = ""
     direzione = "aumento" if media_camp > media_pop else "diminuzione"
     
-    # Discussione per il Test Z
-    if p_value_Z < alpha:
-        discussione += f"Basandoci sul test Z (p-value = {p_value_Z:.4f}), rifiutiamo l'ipotesi nulla. Vi è evidenza statistica significativa al livello {alpha} di un {direzione} significativo.\n"
-    else:
-        discussione += f"Basandoci sul test Z (p-value = {p_value_Z:.4f}), non rifiutiamo l'ipotesi nulla. Non vi è evidenza statistica sufficiente al livello {alpha} per affermare una {direzione} significativa.\n"
+    # Discussione per il Test Z, se p_value_Z è fornito
+    if p_value_Z is not None:
+        if p_value_Z < alpha:
+            discussione += f"Basandoci sul test Z (p-value = {p_value_Z:.4f}), rifiutiamo l'ipotesi nulla. Vi è evidenza statistica significativa al livello {alpha} di un {direzione} significativo.\n"
+        else:
+            discussione += f"Basandoci sul test Z (p-value = {p_value_Z:.4f}), non rifiutiamo l'ipotesi nulla. Non vi è evidenza statistica sufficiente al livello {alpha} per affermare una {direzione} significativa.\n"
     
-    # Discussione per il Test T
-    if p_value_T < alpha:
-        discussione += f"Basandoci sul test T (p-value = {p_value_T:.4f}), rifiutiamo l'ipotesi nulla. Vi è evidenza statistica significativa al livello {alpha} di un {direzione} significativo, anche quando si considera la varianza stimata dal campione.\n"
-    else:
-        discussione += f"Basandoci sul test T (p-value = {p_value_T:.4f}), non rifiutiamo l'ipotesi nulla. Non vi è evidenza statistica sufficiente al livello {alpha} per affermare una {direzione} significativa quando si considera la varianza stimata dal campione.\n"
+    # Discussione per il Test T, se p_value_T è fornito
+    if p_value_T is not None:
+        if p_value_T < alpha:
+            discussione += f"Basandoci sul test T (p-value = {p_value_T:.4f}), rifiutiamo l'ipotesi nulla. Vi è evidenza statistica significativa al livello {alpha} di un {direzione} significativo, anche quando si considera la varianza stimata dal campione.\n"
+        else:
+            discussione += f"Basandoci sul test T (p-value = {p_value_T:.4f}), non rifiutiamo l'ipotesi nulla. Non vi è evidenza statistica sufficiente al livello {alpha} per affermare una {direzione} significativa quando si considera la varianza stimata dal campione.\n"
     
     return discussione
 
