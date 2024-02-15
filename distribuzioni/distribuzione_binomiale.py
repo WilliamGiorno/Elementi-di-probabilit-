@@ -8,6 +8,7 @@ def media(n, p):
 def deviazione_standard(n, p):
     return (n * p * (1 - p)) 
 
+
 # Utilizzata soprattutto quando ci si interessa alla variabilità della proporzione di successi piuttosto che al conteggio totale dei successi. 
 # Questo tipo di calcolo è tipico quando si lavora con proporzioni o percentuali in grandi campioni.
 def deviazione_standard_dei_successi(n, p):

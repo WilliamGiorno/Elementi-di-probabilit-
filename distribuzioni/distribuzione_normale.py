@@ -58,6 +58,11 @@ def p_value_t(t_stat, df):
     return 1 - stats.t.cdf(abs(t_stat), df)
 
 
+def calcola_dimensione_campione(media, deviazione_standard, alpha):
+    z = stats.norm.ppf(alpha)
+    return media + z * deviazione_standard
+
+
 def discuti_risultati_test(media_camp, media_pop, p_value_Z, p_value_T, alpha=0.10):
     discussione = ""
     direzione = "aumento" if media_camp > media_pop else "diminuzione"
