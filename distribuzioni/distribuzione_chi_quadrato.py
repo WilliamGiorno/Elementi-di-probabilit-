@@ -26,6 +26,22 @@ def limite_inferiore_S(alpha, n, sigma):
     return limite_inferiore
 
 
+def limite_superiore_S(alpha, n, sigma):
+    df = n - 1
+    chi2_critico = valore_critico_chi2(1 - alpha, df)
+    limite_superiore = math.sqrt(chi2_critico / df) * sigma
+    return limite_superiore
+
+
+def limite_inferiore_e_superiore_bilaterale(alpha, n, sigma):
+    df = n - 1
+    chi2_critico_inferiore = valore_critico_chi2(alpha / 2, df)
+    chi2_critico_superiore = valore_critico_chi2(1 - (alpha / 2), df)
+    limite_inferiore = math.sqrt((df * sigma ** 2) / chi2_critico_superiore)
+    limite_superiore = math.sqrt((df * sigma ** 2) / chi2_critico_inferiore)
+    return limite_inferiore, limite_superiore
+
+
 def valore_critico_chi2(alpha, df):
     chi2_critico = chi2.ppf(alpha, df)
     return chi2_critico
@@ -36,6 +52,14 @@ def calcola_chi_quadrato(campione, sigma):
     deviazione_standard = deviazione_standard_campionaria(campione)
     z = (n - 1) * (deviazione_standard / sigma)**2
     return z
+
+
+def potenza_test_chi_quadrato(campione, sigma):
+    n = len(campione)
+    deviazione_standard = deviazione_standard_campionaria(campione)
+    z = (n - 1) * (deviazione_standard / sigma)**2
+    potenza = 1 - chi2.cdf(z, n - 1)
+    return potenza
 
 
 def conferma_ipotesi(chi_quadrato, p_value, alpha, campione):
